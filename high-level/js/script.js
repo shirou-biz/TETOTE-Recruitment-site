@@ -70,47 +70,78 @@ dotList.forEach((dot) => {
 
 
 $(function(){
-    $('.header-nav_section').find('ul').hide();
-
-    $('.header-nav_section').hover(
-        function() {
-            $(this).children('.header-nav_section-itemlist').stop().slideDown(500);
-            $(this).find('.plus-height').stop().fadeOut(300); 
-        },
-        function() {
-            $(this).children('.header-nav_section-itemlist').stop().slideUp(500);
-            $(this).find('.plus-height').stop().fadeIn(300); 
-        }
-    );
 
     $('#hamburger').click(function(){
         $(this).toggleClass("is-active");
-        $('.sp-global-menu').toggleClass("is-active");
+        $('.global-menu').toggleClass("is-active");
+
+        // header-innerにmenu-openクラスをtoggle
+        $('#header').toggleClass('menu-open');
+
+        const $logoWrapper = $('.header__logo');
+        const $logoImage = $logoWrapper.find('img');
+
+        $logoWrapper.addClass('is-fading'); // フェードアウト
+
+        setTimeout(function() {
+            if ($('#hamburger').hasClass('is-active')) {
+                $logoImage.attr('src', 'images/tetote-logo-black.png');
+            } else {
+                $logoImage.attr('src', 'images/tetote-logo-white.png');
+            }
+        }, 100); // フェード中にsrc切り替え
+
+        setTimeout(function() {
+            $logoWrapper.removeClass('is-fading'); // フェードイン
+        }, 100); // CSS transitionとタイミング合わせ
     });
 
-    if(document.querySelectorAll('.fv__slider-box').length){
-        $('.fv__slider-box').slick({
-            autoplay: true,       // 自動再生
-            autoplaySpeed: 0,  // 3秒ごとに切り替え
-            dots: false,           // ドットナビゲーションを表示
-            arrows: false,         // 前後の矢印を表示
-            infinite: true,       // 無限ループ
-            speed: 8000,           // アニメーション速度
-            slidesToShow: 2,      // 一度に表示するスライド数
-            slidesToScroll: 1,     // 一度にスクロールするスライド数
-            cssEase: 'linear',
+    // if(document.querySelectorAll('.fv__slider-box').length){
+    //     $('.fv__slider-box').slick({
+    //         autoplay: true,       // 自動再生
+    //         autoplaySpeed: 0,  // 3秒ごとに切り替え
+    //         dots: false,           // ドットナビゲーションを表示
+    //         arrows: false,         // 前後の矢印を表示
+    //         infinite: true,       // 無限ループ
+    //         speed: 8000,           // アニメーション速度
+    //         slidesToShow: 1,      // 一度に表示するスライド数
+    //         slidesToScroll: 1,     // 一度にスクロールするスライド数
+    //         cssEase: 'linear',
 
-            responsive: [
-                {
-                breakpoint: 700, // 1024px以下の時
-                settings: {
-                    slidesToShow: 1
-                }
-                },
-            ]
-        });
-    }
+    //         // responsive: [
+    //         //     {
+    //         //     breakpoint: 700,
+    //         //     settings: {
+    //         //         slidesToShow: 1
+    //         //     }
+    //         //     },
+    //         // ]
+    //     });
+    // }
 
+    // if(document.querySelectorAll('.member__slider-box').length){
+    //     $('.member__slider-box').slick({
+    //         autoplay: false,       // 自動再生
+    //         autoplaySpeed: 0,  // 3秒ごとに切り替え
+    //         dots: false,           // ドットナビゲーションを表示
+    //         arrows: true,         // 前後の矢印を表示
+    //         infinite: true,       // 無限ループ
+    //         speed: 600,           // アニメーション速度
+    //         slidesToShow: 3,      // 一度に表示するスライド数
+    //         slidesToScroll: 1,     // 一度にスクロールするスライド数
+    //         cssEase: 'linear',
+    //         cssEase: 'ease-in-out' // なめらかな加速減速
+
+    //         // responsive: [
+    //         //     {
+    //         //     breakpoint: 700,
+    //         //     settings: {
+    //         //         slidesToShow: 1
+    //         //     }
+    //         //     },
+    //         // ]
+    //     });
+    // }
 
     $('.hover').hover(
         function() {
@@ -123,6 +154,36 @@ $(function(){
         }
     );
 
+    $(function() {
+        function updateHeaderState() {
+            let scrollThreshold;
+            const windowWidth = $(window).width();
+
+            // ブレイクポイントごとの閾値
+            if (windowWidth >= 1024) {
+            scrollThreshold = 823;
+            } else if (windowWidth >= 768) {
+            scrollThreshold = 823;
+            } else {
+            scrollThreshold = 667;
+            }
+
+            const scrollTop = $(window).scrollTop();
+
+            if (scrollTop > scrollThreshold) {
+            $('#header').addClass('scrolled');
+            $('#logo-img').attr('src', 'images/tetote-logo-black.png');
+            } else {
+            $('#header').removeClass('scrolled');
+            $('#logo-img').attr('src', 'images/tetote-logo-white.png');
+            }
+        }
+    
+        // 初回とスクロール・リサイズ時に実行
+        updateHeaderState();
+        $(window).on('scroll resize', updateHeaderState);
+    });
+
     $('.news__list-item').hover(
         function() {
             $(this).stop().toggleClass("is-active");
@@ -132,6 +193,50 @@ $(function(){
         }
     );
 });
+
+function initializeSlider(selector, options) {
+    // Slick初期化
+    $(selector).slick(options);
+  
+    // クローン含め、奇数スライドにis-oddクラスを付与
+    $(selector).on('setPosition', function () {
+        const $allSlides = $(selector).find('.slick-slide');
+        $allSlides.removeClass('is-odd');
+        $allSlides.each(function (index) {
+            if (index % 2 === 0) {
+            $(this).addClass('is-odd');
+            }
+        });
+    });
+}
+
+if ($('.fv__slider-box').length) {
+    initializeSlider('.fv__slider-box', {
+        arrows: false,
+        infinite: true,
+        speed: 8000,
+        autoplay: true,
+        autoplaySpeed: 0,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        cssEase: 'linear',
+        dots: false
+    });
+}
+  
+  if ($('.member__slider-box').length) {
+    initializeSlider('.member__slider-box', {
+        arrows: true,
+        infinite: true,
+        speed: 600,
+        autoplay: false,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        cssEase: 'ease-in-out',
+        dots: false,
+        variableWidth: true,
+    });
+}
 
 
 const buttonOpen = document.querySelectorAll(".modalOpen");
