@@ -60,6 +60,7 @@ body{
     color: #222222;
     display: flex;
     justify-content: center;
+    flex-flow: column;
 }
 
 .en {
@@ -101,7 +102,7 @@ section {
     align-items: center;
     justify-content: space-between;
     transition: background-color 0.3s;
-    @include mq($md){
+    @include mq($lg){
         height: 54px;
         padding: 0 12px;
     }
@@ -120,7 +121,7 @@ section {
         transition: opacity 0.3s ease;
         opacity: 1;
     }
-    @include mq($md){
+    @include mq($lg){
         width: 154px;
     }
 }
@@ -154,7 +155,7 @@ section {
             color: #222222;
         }
 
-        @include mq($md){
+        @include mq($lg){
             display: none;
         }
     }
@@ -176,7 +177,7 @@ section {
         background-color: #988C2C;
     }
 
-    @include mq($md){
+    @include mq($lg){
         display: none;
     }
 }
@@ -191,7 +192,7 @@ section {
     width: 52px;
     cursor: pointer;
     transition: all 0.3s ease;    
-    @include mq($md){
+    @include mq($lg){
         height: 34px;
         width: 32px;
     }
@@ -206,21 +207,21 @@ section {
 
         &:nth-child(1){
             top: -2px;
-            @include mq($md){
+            @include mq($lg){
                 top: 0px;
             }
         }
 
         &:nth-child(2){
             top: 13px;
-            @include mq($md){
+            @include mq($lg){
                 top: 9px;
             }
         }
 
         &:nth-child(3){
             top: 28px;
-            @include mq($md){
+            @include mq($lg){
                 top: 18px;
             }
         }
@@ -234,7 +235,7 @@ section {
         transition: all 0.3s;
         line-height: 1;
         transform: translateY(-50%);
-        @include mq($md){
+        @include mq($lg){
             top: 30px;
             font-size: 10px;
         }     
@@ -245,7 +246,7 @@ section {
             top: 15px;
             transform: rotate(45deg);
             background-color: #222222;
-            @include mq($md){
+            @include mq($lg){
                 top: 12px;
             }
         }
@@ -258,7 +259,7 @@ section {
             top: 15px;
             transform: rotate(-45deg);
             background-color: #222222;
-            @include mq($md){
+            @include mq($lg){
                 top: 12px;
             }
         }
@@ -302,20 +303,23 @@ section {
     height: 100%;
     background-color: #FAF7F1;
     padding-top: 208px;
-    padding-right: 131px;
+    padding-right: rclamp(60, 131, 1025, 1440);
     display: flex;
     justify-content: flex-end;
     align-items: flex-start; /* ← これを追加 */
+    @include mq($lg){
+        padding: 91px rclamp(30, 60, 769, 1024) 0 rclamp(30, 60, 769, 1024);
+        width: 100%;
+    }
     @include mq($md){
         padding: 91px 12px 0 12px;
-        width: 100%;
     }
 }
 
 .global-menu-wrapper{
     display: flex;
     height: auto;
-    @include mq($md){
+    @include mq($lg){
         display: block;
         width: 100%;
     }
@@ -330,14 +334,14 @@ section {
         width: 250px;
     }
 
-    @include mq($md){
+    @include mq($lg){
         display: none;
     }
 }
 
 .nav-inner{
     border-left: 1px solid #AFA86F;
-    @include mq($md){
+    @include mq($lg){
         border: 0;
     } 
 }
@@ -350,7 +354,7 @@ section {
     grid-template-rows: repeat(3, auto);   /* 縦3 */
     list-style: none;
     column-gap: 30px; /* 👈 縦の間だけ余白を入れる */
-    @include mq($md){
+    @include mq($lg){
         padding: 0;
         display: flex;
         flex-flow: column;
@@ -390,7 +394,7 @@ section {
             color: #222222;
         }
 
-        @include mq($md){
+        @include mq($lg){
             width: 248px;
         }        
     }
@@ -410,12 +414,12 @@ section {
             background-color: #988C2C;
         }
 
-        @include mq($md){
+        @include mq($lg){
             width: 248px;
         }        
     }
 
-    @include mq($md){
+    @include mq($lg){
         padding: 13px 0;
         width: 100%;
 
@@ -436,7 +440,7 @@ section {
     font-size: 32px;
     margin-bottom: 11px;
     color: #222222;
-    @include mq($md){
+    @include mq($lg){
         font-size: 18px;
         margin-bottom: 9px;
     }  
@@ -445,7 +449,7 @@ section {
 .global-menu__list-item-subtext{
     font-weight: 700;
     color: #222222;
-    @include mq($md){
+    @include mq($lg){
         font-size: 12px;
     }  
 }
@@ -1507,6 +1511,9 @@ section {
     p{
         font-size: 14px;
         line-height: 1;
+        @include mq($lg){
+            font-size: 12px;
+        }
     }
 }
 
@@ -1665,6 +1672,13 @@ section {
             font-weight: 700;
             font-size: 20px;
         }
+
+        img{
+            @include mq($md){
+                width: 19px;
+                right: 20px;
+            }
+        }
     }
 }
 
@@ -1688,6 +1702,13 @@ section {
         &-text{
             font-weight: 700;
             font-size: 20px;
+        }
+
+        img{
+            @include mq($md){
+                width: 19px;
+                right: 20px;
+            }
         }
     }
 }
@@ -1716,7 +1737,7 @@ section {
     position: absolute;
     top: 352px;
     left: 50%;
-    width: 956px;
+    width: min(75vw,956px);
     border-radius: 20px;
     background-color: #FFFFFF;
     padding: 50px;
@@ -1725,16 +1746,17 @@ section {
     @include mq($md){
         top: 132px;
         left: 50%;
-        width: 343px;
+        width: max(50vw,343px);
         padding: 24px 24px 29px 24px;
     }
 
     .entry-btn{
         padding: 27px;
-        width: 556px;
+        width: min(100%,556px);
         margin: 0 auto;
         position: relative;
         @include mq($md){
+            display: block;
             padding: 20px 16px; // 左右の余白を削減
             width: 100%;
             max-width: 200px;
@@ -1742,6 +1764,7 @@ section {
 
         p{
             color: #222222;
+            font-size: 16px;
             @include mq($md){
                 font-size: 14px;
             }
@@ -1750,7 +1773,7 @@ section {
         img{
             position: absolute;
             width: 16px;
-            right: 27px;
+            right: 20px;
             top: 50%;
             transform: translateY(-50%);
             @include mq($md){
@@ -1767,5 +1790,123 @@ section {
     @include mq($md){
         font-size: 14px;
         line-height: 2.5;
+        margin-bottom: 24px;
+    }
+}
+
+.footer{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding:0 rclamp(30, 64, 1025, 1440) 64px rclamp(30, 64, 1025, 1440);
+    @include mq($md){
+        padding-bottom: 0;
+    }
+}
+
+.footer-inner{
+    width: min(1312px,100%);
+    background-color: #FAF7F1;
+    padding: 198px rclamp(40, 178, 1025, 1440) 57px rclamp(40, 178, 1025, 1440);
+    display: flex;
+    border-radius: 0 0 20px 20px; 
+    @include mq($lg){
+        width: 100%;
+        padding: 163px 0 40px 0;
+        flex-flow: column;
+        align-items: center;
+    }
+    @include mq($md){
+        padding: 163px 0 24px 0;
+        border-radius: 0;
+    }
+}
+
+.footer__left{
+    display: flex;
+    flex-flow: column;
+    margin-right: rclamp(40, 109, 1025, 1440);
+    @include mq($lg){
+        order: 2;
+        align-items: center;
+        margin-right: 0;
+    }
+}
+
+.footer__left-logo{
+    margin-bottom: 98px;
+    @include mq($lg){
+        margin-bottom: 42px;
+    }
+
+    img{
+        width: 250px;
+    }
+}
+
+.footer__left-copyright{
+    font-size: 12px;
+    color: #999999;
+
+}
+
+.footer__right{
+    padding-top: 21px;
+    display: flex;
+    flex-flow: column;
+    flex: 1;
+    @include mq($lg){
+        order: 1;
+        margin-bottom: 25px;
+        padding-top: 0;
+    }
+}
+
+.footer__right-list{
+    margin-bottom: 57px;
+    @include mq($lg){
+        margin-bottom: 51px;
+    }
+}
+
+.footer__right-list-row{
+    display: flex;
+    gap: 22px;
+    @include mq($lg){
+        flex-flow: column;
+        align-items: center;
+        gap: 11px;
+    }
+
+    &:nth-child(1){
+        margin-bottom: 35px;
+        @include mq($lg){
+            margin-bottom: 11px;
+        }
+    }
+
+    a{
+        font-weight: 700;
+        color: #222222;
+        @include mq($lg){
+            font-size: 14px;
+        }
+    }
+}
+
+.footer__right-icons{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    @include mq($lg){
+        justify-content: center;
+    }
+}
+
+.footer__right-icons-item{
+    img{
+        width: 24px;
+        height: 24px;
     }
 }
