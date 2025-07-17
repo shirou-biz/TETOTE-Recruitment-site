@@ -3303,3 +3303,219 @@ section {
     margin-left: 0;
   }
 }
+
+/* STAFF-個人ページ　-------------*/
+.page-staff-personal-fv {
+  background-color: #FAF7F1;
+  margin-top: 118px;
+  width: 100%;
+}
+@media (max-width: 1024px) {
+  .page-staff-personal-fv {
+    margin-top: 54px;
+  }
+}
+
+.page-staff-personal-fv-inner {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 43px 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.page-staff-personal__text {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding-top: 33px;
+}
+
+.page-staff-personal__text-title-wrapper {
+  margin-bottom: 27px;
+}
+
+.page-staff-personal__text-title-1 {
+  padding: 3px 10px;
+  background-color: #FFFFFF;
+  margin-bottom: 17px;
+  display: inline-block;
+}
+.page-staff-personal__text-title-1 p {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1;
+}
+
+.page-staff-personal__text-title-2 {
+  padding: 3px 10px;
+  background-color: #FFFFFF;
+  display: inline-block;
+}
+.page-staff-personal__text-title-2 p {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.page-staff-personal__profile-role {
+  font-weight: 700;
+  font-size: 14px;
+  color: #988C2C;
+  margin-bottom: 3px;
+}
+
+.page-staff-personal__profile-name-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: end;
+  margin-bottom: 8px;
+}
+
+.page-staff-personal__profile-name {
+  font-weight: 700;
+  font-size: 24px;
+  margin-right: 20px;
+}
+
+.page-staff-personal__profile-desc {
+  line-height: 1.8;
+}
+
+.page-staff-personal__img {
+  width: 286px;
+  height: 368px;
+  margin-left: 85px;
+}
+.page-staff-personal__img img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.page-staff-personal__interview-inner {
+  max-width: 1024px;
+  padding: 96px 24px 86px 24px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.page-staff-personal__interview-contents {
+  max-width: 710px;
+  margin-right: 56px;
+}
+
+.page-staff-personal__interview-section {
+  margin-bottom: 23px;
+}
+.page-staff-personal__interview-section:nth-child(n+2):nth-child(-n+6) {
+  max-width: 696px;
+}
+
+.page-staff-personal__interview-section-heading {
+  font-weight: 700;
+  font-size: 24px;
+  margin-bottom: 44px;
+  position: relative;
+}
+.page-staff-personal__interview-section-heading::before {
+  content: "";
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+  width: 100vw;
+  height: 1px;
+  background-color: #222222;
+}
+
+.page-staff-personal__interview-section-desc {
+  line-height: 1.778;
+}
+.page-staff-personal__interview-section-desc span {
+  font-weight: 700;
+}
+
+.page-staff-personal__interview-toc {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin-top: 7px;
+}
+
+.page-staff-personal__interview-toc__title {
+  margin-bottom: 14px;
+}
+.page-staff-personal__interview-toc__title p {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.page-staff-personal__interview-toc__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  gap: 17px;
+}
+.page-staff-personal__interview-toc__list li {
+  font-size: 14px;
+}
+
+.page-staff-personal__othermembers {
+  width: 100%;
+}
+
+.page-staff-personal__othermembers-inner {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 19px 139px 19px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+}
+.page-staff-personal__othermembers-inner .page-staff__list-downer {
+  padding-left: 0;
+  gap: 0;
+}
+.page-staff-personal__othermembers-inner .page-staff__list-item {
+  text-align: left;
+}
+.page-staff-personal__othermembers-inner .page-staff__list-item:nth-child(1) {
+  margin-right: 17px;
+}
+.page-staff-personal__othermembers-inner .page-staff__list-item:nth-child(2) {
+  margin-left: -10px;
+  margin-right: 43px;
+}
+.page-staff-personal__othermembers-inner .page-staff__list-item:nth-child(3) {
+  margin-left: -10px;
+}
+.page-staff-personal__othermembers-inner .member__slider-item_message-wrapper {
+  text-align: left;
+}
+
+.page-staff-personal__othermembers-title {
+  font-weight: 700;
+  font-size: 32px;
+  margin-bottom: 56px;
+}

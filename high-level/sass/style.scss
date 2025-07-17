@@ -2621,3 +2621,202 @@ section {
         }
     }
 }
+
+/* STAFF-個人ページ　-------------*/
+.page-staff-personal-fv{
+    background-color: #FAF7F1;
+    margin-top: 118px;
+    width: 100%;
+
+    @include mq($lg){
+        margin-top: 54px;
+    }
+}
+
+.page-staff-personal-fv-inner{
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 43px 24px;
+    display: flex;
+}
+
+.page-staff-personal__text{
+    flex: 1;
+    padding-top: 33px;
+}
+
+.page-staff-personal__text-title-wrapper{
+    margin-bottom: 27px;
+}
+
+.page-staff-personal__text-title-1{
+    padding: 3px 10px;
+    background-color: #FFFFFF;
+    margin-bottom: 17px;
+    display: inline-block;
+
+    p{
+        font-weight: 700;
+        font-size: 36px;
+        line-height: 1;
+    }
+}
+
+.page-staff-personal__text-title-2{
+    padding: 3px 10px;
+    background-color: #FFFFFF;
+    display: inline-block;
+
+    p{
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 1;
+    }
+}
+
+.page-staff-personal__profile-role{
+    font-weight: 700;
+    font-size: 14px;
+    color: #988C2C;
+    margin-bottom: 3px;
+}
+
+.page-staff-personal__profile-name-wrapper{
+    display: flex;
+    align-items: end;
+    margin-bottom: 8px;
+}
+
+.page-staff-personal__profile-name{
+    font-weight: 700;
+    font-size: 24px;
+    margin-right: 20px;
+}
+
+.page-staff-personal__profile-desc{
+    line-height: 1.8;
+}
+
+.page-staff-personal__img{
+    width: 286px;
+    height: 368px;
+    margin-left: 85px;
+
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.page-staff-personal__interview-inner{
+    max-width: 1024px;
+    padding: 96px 24px 86px 24px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.page-staff-personal__interview-contents{
+    max-width: 710px;
+    margin-right: 56px;    
+}
+
+.page-staff-personal__interview-section{
+    margin-bottom: 23px;
+    &:nth-child(n+2):nth-child(-n+6){
+        max-width: 696px;
+    }
+}
+
+.page-staff-personal__interview-section-heading{
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: 44px;
+    position: relative;
+    &::before {
+        content: "";
+        position: absolute;
+        left: -16px;
+        top: 50%;
+        transform: translateY(-50%);
+        transform: translateX(-100%); // 要素自身の幅分左へ
+        width: 100vw;
+        height: 1px;
+        background-color: #222222;
+    }
+}
+
+.page-staff-personal__interview-section-desc{
+    line-height: 1.778;
+    span{
+        font-weight: 700;
+    }
+}
+
+.page-staff-personal__interview-toc{
+    flex: 1;
+    margin-top: 7px;
+}
+
+.page-staff-personal__interview-toc__title{
+    margin-bottom: 14px;
+    p{
+        font-weight: 700;
+        font-size: 14px;
+    }
+}
+
+.page-staff-personal__interview-toc__list{
+    display: flex;
+    flex-flow: column;
+    gap: 17px;
+    li{
+        font-size: 14px;
+    }
+}
+
+.page-staff-personal__othermembers{
+    width: 100%;
+}
+
+.page-staff-personal__othermembers-inner{
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 0 19px 139px 19px;
+    display: flex;
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+
+    .page-staff__list-downer{
+        padding-left: 0;
+        gap: 0;
+    }
+
+    .page-staff__list-item{
+        text-align: left;
+    }
+
+    .page-staff__list-item:nth-child(1) {
+        margin-right: 17px;
+    }
+
+    .page-staff__list-item:nth-child(2) {
+        margin-left: -10px;
+        margin-right: 43px;
+    }
+
+    .page-staff__list-item:nth-child(3) {
+        margin-left: -10px;
+    }
+
+    .member__slider-item_message-wrapper {
+        text-align: left;
+    }
+}
+
+.page-staff-personal__othermembers-title{
+    font-weight: 700;
+    font-size: 32px;
+    margin-bottom: 56px;
+}
