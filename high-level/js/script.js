@@ -140,3 +140,46 @@ if ($('.member__slider-box').length) {
         variableWidth: true,
     });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const tocLinks = document.querySelectorAll('.page-staff-personal__interview-toc__list a');
+    const sections = document.querySelectorAll('.page-staff-personal__interview-section');
+
+    // 1. スムーススクロール
+    tocLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1); // "section-1"
+            const target = document.getElementById(targetId);
+            if (target) {
+                window.scrollTo({
+                    top: target.offsetTop - 728,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // 2. Intersection Observer
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -30% 0px',
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                console.log("現在表示中のセクション:", id); // ← この行を追加して確認
+                tocLinks.forEach(link => {
+                    link.classList.toggle('is-active', link.getAttribute('href').substring(1) === id);
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+});
