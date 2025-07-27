@@ -46,11 +46,11 @@ $(function(){
     $('.hover').hover(
         function() {
             $(this).stop().toggleClass("is-active");
-            $(this).children().stop().toggleClass("is-active");
+            $(this).find('.more-btn-text, img').stop().toggleClass("is-active");
         },
         function() {
             $(this).stop().toggleClass("is-active");
-            $(this).children().stop().toggleClass("is-active");
+            $(this).find('.more-btn-text, img').stop().toggleClass("is-active");
         }
     );
 
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const target = document.getElementById(targetId);
             if (target) {
                 window.scrollTo({
-                    top: target.offsetTop - 728,
+                    top: target.offsetTop - 130,
                     behavior: 'smooth'
                 });
             }
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Intersection Observer
     const observerOptions = {
         root: null,
-        rootMargin: '0px 0px -30% 0px',
+        rootMargin: '-150px 0px -60% 0px',
         threshold: 0
     };
 
