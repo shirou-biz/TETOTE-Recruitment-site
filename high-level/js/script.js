@@ -46,11 +46,11 @@ $(function(){
     $('.hover').hover(
         function() {
             $(this).stop().toggleClass("is-active");
-            $(this).find('.more-btn-text, img').stop().toggleClass("is-active");
+            $(this).find('.more-btn-text, img, .submit-btn-text').stop().toggleClass("is-active");
         },
         function() {
             $(this).stop().toggleClass("is-active");
-            $(this).find('.more-btn-text, img').stop().toggleClass("is-active");
+            $(this).find('.more-btn-text, img, .submit-btn-text').stop().toggleClass("is-active");
         }
     );
 
@@ -182,4 +182,17 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(section => {
         observer.observe(section);
     });
+});
+
+$(function(){
+    $('.page-faq_main-section-list-item').hover(
+      function() {
+        $(this).find('.page-faq_main-section-list-item_open').stop().slideDown(300);
+        $(this).find('.plus-height').stop().fadeOut(200);
+      },
+      function() {
+        $(this).find('.page-faq_main-section-list-item_open').stop().slideUp(300);
+        $(this).find('.plus-height').stop().fadeIn(200);
+      }
+    );
 });
