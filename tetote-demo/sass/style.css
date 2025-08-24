@@ -815,7 +815,7 @@ section {
   .fv__main_news {
     top: 609px;
     left: 12px;
-    width: clamp(21.9375rem, 4.1059160305rem + 76.0814249364vw, 40.625rem);
+    width: calc(100% - 24px);
     border: 0;
     -webkit-box-shadow: 0 0 0 1px #222222;
             box-shadow: 0 0 0 1px #222222;
@@ -1276,6 +1276,11 @@ section {
 
 .member__slider-box .slick-list {
   padding-right: 150px;
+}
+@media (max-width: 768px) {
+  .member__slider-box .slick-list {
+    padding-right: 24px;
+  }
 }
 .member__slider-box .slick-slide {
   width: 300px !important;

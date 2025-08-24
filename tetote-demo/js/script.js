@@ -5,96 +5,103 @@ dotList.forEach((dot) => {
     dot.classList.toggle("is-active");
 });
 
+jQuery(function ($) {
+  const $win = $(window);
+  const $hamburger = $('#hamburger');
+  const $header = $('#header');
+  const $headerRoot = $('.header');
 
-$(function(){
-    const isTopPage = location.pathname.endsWith('/') || location.pathname.endsWith('/index.html');
+  // ロゴ要素 & 絶対URL（nav.php の data-* から取得）
+  const logoEl = document.getElementById('logo-img');
+  const $logoWrapper = $('.header__logo');
+  const $logoImage = $logoWrapper.find('img'); // ← 未使用だがこのままでもOK
+  const logoWhite = logoEl ? logoEl.dataset.logoWhite : '';
+  const logoBlack = logoEl ? logoEl.dataset.logoDark : ''; // ← ★ここだけ修正
 
-    $('#hamburger').click(function(){
-        $(this).toggleClass("is-active");
-        $('.global-menu').toggleClass("is-active");
+  // トップページ判定（WPの body クラス + 旧来のパス判定でフォールバック）
+  const isTopPage =
+    document.body.classList.contains('front-page') ||
+    document.body.classList.contains('home') ||
+    location.pathname.endsWith('/') ||
+    location.pathname.endsWith('/index.html');
 
-        // header-innerにmenu-openクラスをtoggle
-        $('#header').toggleClass('menu-open');
-        $('.header').toggleClass('menu-open');
+  // ハンバーガー
+  $hamburger.on('click', function () {
+    $(this).toggleClass('is-active');
+    $('.global-menu').toggleClass('is-active');
 
-        // スクロール禁止用クラスの付け外し
-        $('html, body').toggleClass('no-scroll');
+    // header-innerにmenu-openクラスをtoggle
+    $header.toggleClass('menu-open');
+    $headerRoot.toggleClass('menu-open');
 
-        const $logoWrapper = $('.header__logo');
-        const $logoImage = $logoWrapper.find('img');
+    // スクロール禁止用クラスの付け外し
+    $('html, body').toggleClass('no-scroll');
 
-        if (isTopPage) {
-            $logoWrapper.addClass('is-fading'); // フェードアウト
+    if (!logoEl) return;
 
-            setTimeout(function() {
-                if ($('#hamburger').hasClass('is-active')) {
-                    $logoImage.attr('src', 'images/tetote-logo-black.png');
-                } else {
-                    $logoImage.attr('src', 'images/tetote-logo-white.png');
-                }
-            }, 100); // フェード中にsrc切り替え
+    if (isTopPage) {
+      $logoWrapper.addClass('is-fading'); // フェードアウト
 
-            setTimeout(function() {
-                $logoWrapper.removeClass('is-fading'); // フェードイン
-            }, 100); // CSS transitionとタイミング合わせ
-        } else {
-            // 下層ページは常に黒ロゴに固定
-            $logoImage.attr('src', 'images/tetote-logo-black.png');
-        }
-    });
+      setTimeout(function () {
+        // data-* の絶対URLで差し替え
+        logoEl.src = $hamburger.hasClass('is-active') ? logoBlack : logoWhite;
+      }, 100); // フェード中にsrc切り替え
 
-    $('.hover').hover(
-        function() {
-            $(this).stop().toggleClass("is-active");
-            $(this).find('.more-btn-text, img, .submit-btn-text').stop().toggleClass("is-active");
-        },
-        function() {
-            $(this).stop().toggleClass("is-active");
-            $(this).find('.more-btn-text, img, .submit-btn-text').stop().toggleClass("is-active");
-        }
-    );
+      setTimeout(function () {
+        $logoWrapper.removeClass('is-fading'); // フェードイン
+      }, 100); // CSS transitionとタイミング合わせ
+    } else {
+      // 下層ページは常に黒ロゴに固定（絶対URL）
+      logoEl.src = logoBlack;
+    }
+  });
 
-    $(function() {
-        const isTopPage = location.pathname.endsWith('/') || location.pathname.endsWith('/index.html');
+  // ホバー（そのまま）
+  $('.hover').hover(
+    function () {
+      $(this).stop().toggleClass('is-active');
+      $(this).find('.more-btn-text, img, .submit-btn-text').stop().toggleClass('is-active');
+    },
+    function () {
+      $(this).stop().toggleClass('is-active');
+      $(this).find('.more-btn-text, img, .submit-btn-text').stop().toggleClass('is-active');
+    }
+  );
 
-        if (isTopPage) {
-            function updateHeaderState() {
-                let scrollThreshold;
-                const windowWidth = $(window).width();
+  // スクロールでヘッダー状態更新（相対パスは使わない）
+  function updateHeaderState() {
+    if (!logoEl) return;
 
-                // ブレイクポイントごとの閾値
-                if (windowWidth >= 1024) {
-                scrollThreshold = 823;
-                } else if (windowWidth >= 768) {
-                scrollThreshold = 823;
-                } else {
-                scrollThreshold = 667;
-                }
+    let scrollThreshold;
+    const windowWidth = $win.width();
 
-                const scrollTop = $(window).scrollTop();
+    // ブレイクポイントごとの閾値（元コード維持）
+    if (windowWidth >= 1024) {
+      scrollThreshold = 823;
+    } else if (windowWidth >= 768) {
+      scrollThreshold = 823;
+    } else {
+      scrollThreshold = 667;
+    }
 
-                if (scrollTop > scrollThreshold) {
-                $('#header').addClass('scrolled');
-                $('.header').addClass('scrolled');
-                $('#logo-img').attr('src', 'images/tetote-logo-black.png');
-                } else {
-                $('#header').removeClass('scrolled');
-                $('.header').removeClass('scrolled');
-                $('#logo-img').attr('src', 'images/tetote-logo-white.png');
-                }
-            }
-        
-            // 初回とスクロール・リサイズ時に実行
-            updateHeaderState();
-            $(window).on('scroll resize', updateHeaderState);
+    const scrolled = $win.scrollTop() > scrollThreshold;
 
-        } else {
-            $('.header').addClass('scrolled');
-            $('#header').addClass('scrolled');
-            $('#logo-img').attr('src', 'images/tetote-logo-black.png');
-        }
-    });
+    $header.toggleClass('scrolled', scrolled);
+    $headerRoot.toggleClass('scrolled', scrolled);
 
+    // data-*（絶対URL）で切り替え
+    logoEl.src = scrolled ? logoBlack : logoWhite;
+  }
+
+  if (isTopPage) {
+    // 初回とスクロール・リサイズ時に実行
+    updateHeaderState();
+    $win.on('scroll resize', updateHeaderState);
+  } else {
+    $headerRoot.addClass('scrolled');
+    $header.addClass('scrolled');
+    if (logoEl) logoEl.src = logoBlack; // 下層は常に黒（絶対URL）
+  }
 });
 
 function initializeSlider(selector, options) {
